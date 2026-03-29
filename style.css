@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #8312c4;
+    font-family: 'Georgia', serif;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    touch-action: none; /* Prevents scrolling/zooming on mobile during the game */
+    transition: background 2s ease;
+}
+
+#instruction {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    text-align: center;
+    font-size: 1.8rem;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+#boxWrapper {
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+#giftBox {
+    font-size: 5rem;
+    user-select: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#revealScene {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    animation: fadeIn 2.5s forwards;
+}
+
+.ring-image {
+    max-width: 250px;
+    width: 100%;
+    filter: drop-shadow(0 0 15px white);
+    margin: 20px 0;
+}
+
+.proposal-text {
+    font-size: 2.5rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#finalYes {
+    padding: 15px 50px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    border: none;
+    background: white;
+    color: #8312c4;
+    cursor: pointer;
+    font-weight: bold;
+}
