@@ -1,7 +1,7 @@
 const quizData = [
     {
         question: "Where was our very first date?",
-        options: ["The Coffee Shop", "The Park", "The Italian Place", "The Movies"],
+        options: ["The Coffee Shop", "The Park", "Round 1", "The Movies"],
         correct: 2 // Index of the correct answer
     },
     {
@@ -10,8 +10,13 @@ const quizData = [
         correct: 2
     },
     {
-        question: "How many days have we been together?",
-        options: ["500", "732", "Too many to count", "100"],
+        question: "How many days have we been together? (since official)",
+        options: ["500", "182", "Too many to count", "100"],
+        correct: 1
+    }
+    {
+        question: "When is my birthday?",
+        options: ["5/12", "5/11", "9/6", "6/7"],
         correct: 1
     }
 ];
