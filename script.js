@@ -13,7 +13,7 @@ const quizData = [
         question: "How many days have we been together? (since official)",
         options: ["500", "182", "Too many to count", "100"],
         correct: 1
-    }
+    },
     {
         question: "When is my birthday?",
         options: ["5/12", "5/11", "9/6", "6/7"],
