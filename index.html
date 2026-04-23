@@ -2,32 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Story ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#18162a">
+    <title>Where We Were 💕</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="quiz-container" class="container">
-        <h2 id="question-text">Question 1: Where was our first date?</h2>
-        <div id="options-container">
-            </div>
-        <p id="feedback" class="hidden">Oops! Try again... ❤️</p>
-    </div>
+    <!-- ════════════════════════════════════════
+         SCREEN 1 — QUIZ
+    ════════════════════════════════════════ -->
+    <main id="screen-quiz" class="screen screen--active" aria-label="Quiz">
 
-    <div id="game-container" class="container hidden">
-        <h1>You got them all right!</h1>
-        <p>Now, catch your final prize...</p>
-        <div id="boxWrapper">
-            <div id="giftBox">🎁</div>
+        <div class="progress-bar"
+             role="progressbar"
+             aria-valuemin="0"
+             aria-valuemax="4"
+             aria-valuenow="0"
+             aria-label="Quiz progress">
+            <div class="progress-bar__fill" id="progress-fill"></div>
         </div>
-    </div>
 
-    <div id="reveal-container" class="container hidden">
-        <h1 class="proposal-text">Will you marry me?</h1>
-        <img src="ring.png" alt="Engagement Ring" class="ring-image">
-        <button id="finalYes">YES!</button>
-    </div>
+        <p class="level-label" id="level-label" aria-live="polite">Level 1 of 4</p>
+
+        <div class="photo-frame" id="photo-frame">
+            <img id="level-image"
+                 class="level-photo"
+                 src="assets/image1.svg"
+                 alt="A special place">
+        </div>
+
+        <h1 class="question-text" id="question-text"></h1>
+
+        <div class="answers-grid" id="answers-grid" role="group" aria-label="Answer choices"></div>
+
+    </main>
+
+
+    <!-- ════════════════════════════════════════
+         SCREEN 2 — REWARD SELECTION
+    ════════════════════════════════════════ -->
+    <section id="screen-reward" class="screen" aria-hidden="true" aria-label="Choose your reward">
+        <div class="reward-card">
+
+            <p class="reward-eyebrow" aria-hidden="true">✦ ✦ ✦</p>
+            <h1 class="reward-title">You got them all! 🎉</h1>
+
+            <!-- ★ EDIT YOUR PERSONAL MESSAGE BELOW ★ -->
+            <p class="reward-message">
+                Every one of those places holds a piece of us, and I love
+                that we got to be there together. You've made every single
+                adventure the best one yet. Now pick your reward, my love —
+                you deserve it. 💕
+            </p>
+            <!-- ★ END PERSONAL MESSAGE ★ -->
+
+            <p class="reward-prompt">Choose your prize:</p>
+
+            <div class="reward-grid">
+                <!-- ★ EDIT REWARD LABELS & data-reward VALUES BELOW ★ -->
+                <button class="reward-btn" data-reward="A New Accessory" aria-label="Choose: A New Accessory">
+                    <span class="reward-btn__icon" aria-hidden="true">💍</span>
+                    <span class="reward-btn__label">A New Accessory</span>
+                </button>
+                <button class="reward-btn" data-reward="Monterey Trip" aria-label="Choose: Monterey Trip">
+                    <span class="reward-btn__icon" aria-hidden="true">🌊</span>
+                    <span class="reward-btn__label">Monterey Trip</span>
+                </button>
+                <button class="reward-btn" data-reward="A New Dress" aria-label="Choose: A New Dress">
+                    <span class="reward-btn__icon" aria-hidden="true">👗</span>
+                    <span class="reward-btn__label">A New Dress</span>
+                </button>
+                <button class="reward-btn" data-reward="Her Custom Idea" aria-label="Choose: Surprise me!">
+                    <span class="reward-btn__icon" aria-hidden="true">✨</span>
+                    <span class="reward-btn__label">Surprise Me!</span>
+                </button>
+                <!-- ★ END REWARD OPTIONS ★ -->
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+         SCREEN 3 — THANK YOU
+    ════════════════════════════════════════ -->
+    <section id="screen-thanks" class="screen" aria-hidden="true" aria-label="Thank you">
+        <div class="thanks-inner">
+            <span class="thanks-icon" role="img" aria-label="Love letter">💌</span>
+            <h1 class="thanks-title">Your choice has been sent!</h1>
+            <p class="thanks-sub">I'll make it happen. I love you. ❤️</p>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+         HIDDEN FORMSPREE FORM
+         ★ Replace YOUR_FORM_ID in the action URL
+           with your actual Formspree form ID.
+           Sign up free at formspree.io → New Form
+           → copy the ID from the endpoint URL.
+           e.g. https://formspree.io/f/xpwzgkna
+    ════════════════════════════════════════ -->
+    <form id="reward-form"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+          aria-hidden="true"
+          style="display:none">
+        <input type="hidden" name="reward"   id="reward-input" value="">
+        <input type="hidden" name="_subject" value="She made her choice! 🎉">
+    </form>
 
     <script src="script.js"></script>
 </body>
