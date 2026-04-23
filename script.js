@@ -39,28 +39,28 @@ const FORMSPREE_URL = 'https://formspree.io/f/xaqaapwv';
  */
 const QUIZ_DATA = [
     {
-        image:    'assets/image1.svg',          // ← swap for: 'assets/image1.jpg'
+        image:    'assets/image1.jpg',
         alt:      'Our first spot',
         question: 'Where was this pic of our very first date?',
         answers:  ['Marugame Udon', 'Kizuki Ramen', 'Round 1'],
         correct:  1                              
     },
     {
-        image:    'assets/image2.svg',          // ← swap for: 'assets/image2.jpg'
+        image:    'assets/image2.jpg',
         alt:      'A place we visited together',
         question: 'Where did we take this photo together?',
         answers:  ['A Milktea place', 'Cat cafe', 'A pic 5 years in future'],
         correct:  1
     },
     {
-        image:    'assets/image3.svg',          // ← swap for: 'assets/image3.jpg'
+        image:    'assets/image3.jpg',
         alt:      'Our favourite spot',
         question: 'Where was this taken?',
         answers:  ['Exploratorium', 'Santana Row', 'SF Botanical Garden'],
         correct:  2
     },
     {
-        image:    'assets/image4.svg',          // ← swap for: 'assets/image4.jpg'
+        image:    'assets/image4.jpg',
         alt:      'Our first road trip destination',
         question: 'Where was our first road trip?',
         answers:  ['San Diego', 'Snoopy Museum', 'Runyon Canyon'],
