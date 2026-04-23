@@ -83,6 +83,7 @@ let audioCtx     = null; // lazily initialised on first user tap
 
 const screenQuiz   = document.getElementById('screen-quiz');
 const screenReward = document.getElementById('screen-reward');
+const screenCustom = document.getElementById('screen-custom');
 const screenThanks = document.getElementById('screen-thanks');
 
 const progressFill = document.getElementById('progress-fill');
@@ -92,9 +93,13 @@ const levelImage   = document.getElementById('level-image');
 const questionText = document.getElementById('question-text');
 const answersGrid  = document.getElementById('answers-grid');
 
-const rewardForm   = document.getElementById('reward-form');
-const rewardInput  = document.getElementById('reward-input');
-const rewardBtns   = document.querySelectorAll('.reward-btn');
+const rewardForm       = document.getElementById('reward-form');
+const rewardInput      = document.getElementById('reward-input');
+const rewardBtns       = document.querySelectorAll('.reward-btn');
+
+const customTextarea   = document.getElementById('custom-textarea');
+const btnCustomBack    = document.getElementById('btn-custom-back');
+const btnCustomSubmit  = document.getElementById('btn-custom-submit');
 
 
 /* ════════════════════════════════════════════════
@@ -115,9 +120,12 @@ function renderLevel() {
 
     levelLabel.textContent = `Level ${levelNum} of ${total}`;
 
-    // Swap the photo
+    // Swap the photo and restart the unblur animation
+    levelImage.classList.remove('is-unblurring');
+    void levelImage.offsetWidth; // force reflow so animation replays
     levelImage.src = level.image;
     levelImage.alt = level.alt;
+    levelImage.classList.add('is-unblurring');
 
     // Update question
     questionText.textContent = level.question;
@@ -293,18 +301,14 @@ function transitionTo(from, to) {
    ════════════════════════════════════════════════ */
 
 /**
- * Called when a reward button is tapped.
- * Fills the hidden form field and posts to Formspree via fetch
- * (no page redirect), then transitions to the thank-you screen.
+ * Posts the chosen reward/wish to Formspree and fades to the thank-you screen.
+ * Shared by both the reward buttons and the custom wish flow.
  *
- * @param {string} rewardName  The data-reward value of the tapped button.
+ * @param {string}      value       Text to send as the `reward` field.
+ * @param {HTMLElement} fromScreen  The screen to fade out of.
  */
-async function handleRewardSelection(rewardName) {
-    // Immediately disable all buttons — prevent double-submission
-    rewardBtns.forEach(btn => { btn.disabled = true; });
-
-    // Populate the hidden input so Formspree receives the choice
-    rewardInput.value = rewardName;
+async function submitAndThankYou(value, fromScreen) {
+    rewardInput.value = value;
 
     try {
         const formData = new FormData(rewardForm);
@@ -318,7 +322,31 @@ async function handleRewardSelection(rewardName) {
         // we always show the thank-you screen regardless.
     }
 
-    transitionTo(screenReward, screenThanks);
+    transitionTo(fromScreen, screenThanks);
+}
+
+/** Called when one of the four preset reward buttons is tapped. */
+async function handleRewardSelection(rewardName) {
+    rewardBtns.forEach(btn => { btn.disabled = true; });
+    await submitAndThankYou(rewardName, screenReward);
+}
+
+/** Called when the custom-wish submit button is tapped. */
+async function handleCustomSubmit() {
+    const wish = customTextarea.value.trim();
+
+    if (!wish) {
+        // Shake the textarea to indicate input is required
+        customTextarea.classList.remove('is-empty');
+        void customTextarea.offsetWidth;
+        customTextarea.classList.add('is-empty');
+        return;
+    }
+
+    btnCustomSubmit.disabled    = true;
+    btnCustomSubmit.textContent = 'Sending…';
+
+    await submitAndThankYou(`Custom wish: ${wish}`, screenCustom);
 }
 
 
@@ -330,10 +358,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Draw level 1
     renderLevel();
 
-    // Wire up reward buttons
+    // Wire up reward buttons — custom button opens the wish screen instead
     rewardBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            handleRewardSelection(btn.dataset.reward);
+            if (btn.id === 'btn-custom') {
+                transitionTo(screenReward, screenCustom);
+            } else {
+                handleRewardSelection(btn.dataset.reward);
+            }
         });
     });
+
+    // Custom wish screen — back button
+    btnCustomBack.addEventListener('click', () => {
+        transitionTo(screenCustom, screenReward);
+    });
+
+    // Custom wish screen — send button
+    btnCustomSubmit.addEventListener('click', handleCustomSubmit);
 });

@@ -75,12 +75,41 @@
                     <span class="reward-btn__icon" aria-hidden="true">👗</span>
                     <span class="reward-btn__label">A New Dress</span>
                 </button>
-                <button class="reward-btn" data-reward="Her Custom Idea" aria-label="Choose: Surprise me!">
-                    <span class="reward-btn__icon" aria-hidden="true">✨</span>
-                    <span class="reward-btn__label">Surprise Me!</span>
+                <button class="reward-btn" id="btn-custom" data-reward="Her Custom Idea" aria-label="Choose: Something custom">
+                    <span class="reward-btn__icon" aria-hidden="true">✍️</span>
+                    <span class="reward-btn__label">Something Custom</span>
                 </button>
                 <!-- ★ END REWARD OPTIONS ★ -->
             </div>
+
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+         SCREEN 4 — CUSTOM WISH INPUT
+    ════════════════════════════════════════ -->
+    <section id="screen-custom" class="screen" aria-hidden="true" aria-label="Make a wish">
+        <div class="custom-card">
+
+            <button class="custom-back" id="btn-custom-back" aria-label="Go back to reward selection">
+                ← Back
+            </button>
+
+            <p class="reward-eyebrow" aria-hidden="true">✦ ✦ ✦</p>
+            <h1 class="custom-title">Make a wish ✨</h1>
+            <p class="custom-sub">Whatever you want — write it here and I'll make it happen.</p>
+
+            <textarea id="custom-textarea"
+                      class="custom-textarea"
+                      placeholder="Type your wish here…"
+                      maxlength="500"
+                      aria-label="Your wish"
+                      rows="5"></textarea>
+
+            <button id="btn-custom-submit" class="custom-submit">
+                Send my wish 💌
+            </button>
 
         </div>
     </section>

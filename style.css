@@ -127,6 +127,15 @@ body {
     display: block;
 }
 
+@keyframes unblur {
+    from { filter: blur(14px); }
+    to   { filter: blur(0px); }
+}
+
+.level-photo.is-unblurring {
+    animation: unblur 2.8s ease-out forwards;
+}
+
 /* ── Question ── */
 .question-text {
     flex-shrink: 0;
@@ -323,6 +332,116 @@ body {
     color: var(--c-text);
     text-align: center;
     line-height: 1.3;
+}
+
+
+/* ════════════════════════════════════════════════
+   CUSTOM WISH SCREEN
+   ════════════════════════════════════════════════ */
+#screen-custom {
+    justify-content: center;
+    align-items: center;
+    padding: 32px 22px max(env(safe-area-inset-bottom, 0px), 32px);
+    background-image:
+        radial-gradient(ellipse 90% 60% at 50% 0%, rgba(212, 120, 154, 0.13) 0%, transparent 60%);
+}
+
+.custom-card {
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+}
+
+#screen-custom.screen--active .custom-card {
+    animation: cardUp 560ms 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.custom-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--c-text-muted);
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 8px 0;
+    margin-bottom: 20px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: color 150ms ease;
+    min-height: 44px; /* touch target */
+}
+
+.custom-back:active { color: var(--c-text); }
+
+.custom-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--c-text);
+    margin-bottom: 12px;
+}
+
+.custom-sub {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--c-text-muted);
+    margin-bottom: 24px;
+}
+
+.custom-textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 16px;
+    border-radius: var(--r-md);
+    border: 1.5px solid var(--c-btn-border);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--c-text);
+    font-size: 16px; /* 16px minimum prevents iOS auto-zoom on focus */
+    font-family: inherit;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    display: block;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color 200ms ease;
+    margin-bottom: 16px;
+}
+
+.custom-textarea::placeholder { color: var(--c-text-muted); }
+.custom-textarea:focus         { border-color: var(--c-rose); }
+
+.custom-textarea.is-empty {
+    border-color: var(--c-error);
+    animation: shake 480ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.custom-submit {
+    width: 100%;
+    min-height: 54px;
+    border-radius: var(--r-md);
+    border: none;
+    background: linear-gradient(135deg, var(--c-rose-dark), var(--c-rose));
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: opacity 200ms ease, transform 150ms ease;
+}
+
+.custom-submit:not(:disabled):active {
+    transform: scale(0.97);
+    opacity: 0.85;
+}
+
+.custom-submit:disabled {
+    opacity: 0.5;
+    cursor: default;
 }
 
 
